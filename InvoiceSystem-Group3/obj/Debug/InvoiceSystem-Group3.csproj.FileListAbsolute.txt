@@ -1,0 +1,5 @@
+C:\Users\c55cj\OneDrive\Documentos\GitHub\3280-Group-Project\InvoiceSystem-Group3\obj\Debug\InvoiceSystem-Group3.csproj.AssemblyReference.cache
+C:\Users\c55cj\OneDrive\Documentos\GitHub\3280-Group-Project\InvoiceSystem-Group3\obj\Debug\MainWindow.g.cs
+C:\Users\c55cj\OneDrive\Documentos\GitHub\3280-Group-Project\InvoiceSystem-Group3\obj\Debug\App.g.cs
+C:\Users\c55cj\OneDrive\Documentos\GitHub\3280-Group-Project\InvoiceSystem-Group3\obj\Debug\InvoiceSystem-Group3_MarkupCompile.cache
+C:\Users\c55cj\OneDrive\Documentos\GitHub\3280-Group-Project\InvoiceSystem-Group3\obj\Debug\InvoiceSystem-Group3_MarkupCompile.lref

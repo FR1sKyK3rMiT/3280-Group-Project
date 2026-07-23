@@ -24,5 +24,19 @@ namespace InvoiceSystem_Group3
         {
             InitializeComponent();
         }
+
+        private void SearchInvoiceBtn_Click(object sender, RoutedEventArgs e)
+        {
+            wndSearch searchWindow = new wndSearch();
+            searchWindow.Show();
+        }
+
+        private void ManageItemsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            wndItems itemsWidnow = new wndItems();
+            itemsWidnow.Show();
+        }
+
+
     }
 }
