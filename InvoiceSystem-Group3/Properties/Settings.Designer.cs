@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WalmartInvoice.Properties
+namespace InvoiceSystem_Group3.Properties
 {
 
 

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{09CCF5F7-3425-42D9-A87A-8BDF61DD71E5}</ProjectGuid>
+    <ProjectGuid>{C8A1D9D7-332B-4F94-828F-D0FF6932E281}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>WalmartInvoice</RootNamespace>
-    <AssemblyName>WalmartInvoice</AssemblyName>
+    <RootNamespace>InvoiceSystem_Group3</RootNamespace>
+    <AssemblyName>InvoiceSystem-Group3</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

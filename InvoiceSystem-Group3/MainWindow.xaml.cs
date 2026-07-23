@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WalmartInvoice
+namespace InvoiceSystem_Group3
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
