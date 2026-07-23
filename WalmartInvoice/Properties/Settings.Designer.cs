@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace InvoiceSystemWPF.Properties
+namespace WalmartInvoice.Properties
 {
 
 
