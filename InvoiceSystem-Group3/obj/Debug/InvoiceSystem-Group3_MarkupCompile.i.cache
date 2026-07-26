@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\c55cj\OneDrive\Documentos\GitHub\3280-Group-Project\InvoiceSystem-Group3\obj\Debug\
+C:\Users\Katel\source\repos\3280-Group-Project\InvoiceSystem-Group3\obj\Debug\
 InvoiceSystem_Group3
 none
 false
 DEBUG;TRACE
-C:\Users\c55cj\OneDrive\Documentos\GitHub\3280-Group-Project\InvoiceSystem-Group3\App.xaml
-1219584333
+C:\Users\Katel\source\repos\3280-Group-Project\InvoiceSystem-Group3\App.xaml
+3-1148241299
 
-6-502434485
+111676406649
 13-1310406943
-MainWindow.xaml;
+Main\wndMain.xaml;Items\wndItems.xaml;Search\wndSearch.xaml;
 
-True
+False
 

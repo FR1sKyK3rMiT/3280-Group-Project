@@ -1,0 +1,40 @@
+﻿<Window x:Class="InvoiceSystem_Group3.Search.wndSearch"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InvoiceSystem_Group3"
+        mc:Ignorable="d"
+        Title="Search Invoices" Height="500" Width="700">
+    <Border Padding="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
+                <StackPanel Margin="10,0">
+                    <TextBlock Text="Invoice Number:" Margin="0,0,0,5"/>
+                    <ComboBox Width="120" Name="cbInvoiceNum"/>
+                </StackPanel>
+                <StackPanel Margin="10,0">
+                    <TextBlock Text="Invoice Date:" Margin="0,0,0,5"/>
+                    <ComboBox Width="120" Name="cbInvoiceDate"/>
+                </StackPanel>
+                <StackPanel Margin="10,0">
+                    <TextBlock Text="Total Cost:" Margin="0,0,0,5"/>
+                    <ComboBox Width="120" Name="cbTotalCost"/>
+                </StackPanel>
+            </StackPanel>
+
+            <DataGrid Grid.Row="1" Name="dgInvoices" AutoGenerateColumns="True" Margin="0,0,0,20" IsReadOnly="True"/>
+
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Select" Width="100" Height="30" Margin="10,0" Click="SelectBtn_Click"/>
+                <Button Content="Cancel" Width="100" Height="30" Click="CancelBtn_Click"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

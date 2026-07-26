@@ -55,7 +55,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
+    <Compile Include="Items\clsItemsSQL.cs" />
+    <Compile Include="Items\wndItems.xaml.cs">
+      <DependentUpon>wndItems.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Main\clsMainSQL.cs" />
+    <Compile Include="Search\clsSearchSQL.cs" />
+    <Compile Include="Search\wndSearch.xaml.cs">
+      <DependentUpon>wndSearch.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Main\wndMain.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -63,10 +72,18 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="Main\wndMain.xaml.cs">
+      <DependentUpon>wndMain.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Items\wndItems.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Search\wndSearch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
