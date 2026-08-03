@@ -1,5 +1,13 @@
 # Ignore Visual Studio temporary files
 .vs/
+bin/
+obj/
+*.exe
+*.pdb
+*.cache
+*.resources
+*.g.i.cs
+*.FileListAbsolute.txt
 *.db
 *.db-shm
 *.db-wal
