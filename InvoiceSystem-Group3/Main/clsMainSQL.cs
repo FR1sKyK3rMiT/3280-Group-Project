@@ -15,8 +15,7 @@ namespace InvoiceSystem_Group3.Main
         /// <returns>SQL string to select invoice information.</returns>
         public string SelectInvoiceData(string sInvoiceId)
         {
-            string sSQL = "SELECT * FROM Invoices WHERE InvoiceNum = " + sInvoiceId;
-            return sSQL;
+            return "SELECT * FROM Invoices WHERE InvoiceNum = " + sInvoiceId;
         }
 
         /// <summary>
@@ -25,8 +24,7 @@ namespace InvoiceSystem_Group3.Main
         /// <returns>SQL string to select all items.</returns>
         public string GetInventoryItems()
         {
-            string sSQL = "SELECT ItemCode, ItemDesc, Cost FROM ItemDesc";
-            return sSQL;
+            return "SELECT ItemCode, ItemDesc, Cost FROM ItemDesc";
         }
 
         /// <summary>
@@ -34,8 +32,7 @@ namespace InvoiceSystem_Group3.Main
         /// </summary>
         public string InsertInvoice(string sDate, string sTotalCost)
         {
-            string sSQL = $"INSERT INTO Invoices (InvoiceDate, TotalCost) VALUES ('{sDate}', {sTotalCost})";
-            return sSQL;
+            return $"INSERT INTO Invoices (InvoiceDate, TotalCost) VALUES ('{sDate}', {sTotalCost})";
         }
 
         /// <summary>
@@ -43,8 +40,7 @@ namespace InvoiceSystem_Group3.Main
         /// </summary>
         public string InsertLineItem(string sInvoiceId, string sLineItemNum, string sItemCode)
         {
-            string sSQL = $"INSERT INTO LineItems (InvoiceNum, LineItemNum, ItemCode) VALUES ({sInvoiceId}, {sLineItemNum}, '{sItemCode}')";
-            return sSQL;
+            return $"INSERT INTO LineItems (InvoiceNum, LineItemNum, ItemCode) VALUES ({sInvoiceId}, {sLineItemNum}, '{sItemCode}')";
         }
 
         /// <summary>
@@ -52,8 +48,7 @@ namespace InvoiceSystem_Group3.Main
         /// </summary>
         public string UpdateTotalCost(string sInvoiceId, string sTotalCost)
         {
-            string sSQL = $"UPDATE Invoices SET TotalCost = {sTotalCost} WHERE InvoiceNum = {sInvoiceId}";
-            return sSQL;
+            return  $"UPDATE Invoices SET TotalCost = {sTotalCost} WHERE InvoiceNum = {sInvoiceId}";
         }
 
         /// <summary>
@@ -61,8 +56,50 @@ namespace InvoiceSystem_Group3.Main
         /// </summary>
         public string DeleteLineItems(string sInvoiceId)
         {
-            string sSQL = "DELETE FROM LineItems WHERE InvoiceNum = " + sInvoiceId;
-            return sSQL;
+            return "DELETE FROM LineItems WHERE InvoiceNum = " + sInvoiceId;
+        }
+
+
+        /// <summary>
+        /// Retrieves all line items for a given invoice, including item descriptions and cost.
+        /// </summary>
+        /// <remarks>
+        /// This joins ItemDesc so Main Window can display ItemDesc + Cost in the DataGrid.
+        /// </remarks>
+        public string GetLineItemsForInvoice(string sInvoiceId)
+        {
+            return $@"
+                SELECT 
+                    LineItems.LineItemNum,
+                    LineItems.ItemCode,
+                    ItemDesc.ItemDesc,
+                    ItemDesc.Cost
+                FROM LineItems
+                INNER JOIN ItemDesc ON LineItems.ItemCode = ItemDesc.ItemCode
+                WHERE LineItems.InvoiceNum = {sInvoiceId}
+                ORDER BY LineItems.LineItemNum";
+        }
+
+        /// <summary>
+        /// Retrieves the highest InvoiceNum in the database.
+        /// Used after inserting a new invoice to determine the new ID.
+        /// </summary>
+        public string GetMaxInvoiceNum()
+        {
+            return "SELECT MAX(InvoiceNum) FROM Invoices";
+        }
+
+
+        /// <summary>
+        /// Deletes a single line item from an invoice.
+        /// </summary>
+        /// <remarks>
+        /// This is optional but useful if you want to delete individual items
+        /// without wiping the entire invoice.
+        /// </remarks>
+        public string DeleteSingleLineItem(string sInvoiceId, string sLineItemNum)
+        {
+            return $"DELETE FROM LineItems WHERE InvoiceNum = {sInvoiceId} AND LineItemNum = {sLineItemNum}";
         }
     }
 }
