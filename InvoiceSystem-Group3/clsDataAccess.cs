@@ -131,11 +131,12 @@ namespace InvoiceSystem_Group3
             try
             {
                 conn.Open();
-                Console.WriteLine("Connection successful!");
+                System.Windows.MessageBox.Show("Connection successful!", "Database", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
                 conn.Close();
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
-                Console.WriteLine("Connection failed: " + ex.Message);
+                System.Windows.MessageBox.Show($"Connection failed: {ex.Message}", "Database", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             }
         }
 

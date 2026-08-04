@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 
 using InvoiceSystem_Group3.Search;
 using InvoiceSystem_Group3.Items;
+using InvoiceSystem_Group3;
+//using InvoiceSystem_Group3.clsDataAccess;
 
 namespace InvoiceSystem_Group3.Main
 {
@@ -49,6 +51,12 @@ namespace InvoiceSystem_Group3.Main
             {
                 // RefreshItemsComboBox();
             }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            clsDataAccess db = new clsDataAccess();
+            db.TestConnection();
         }
     }
 }

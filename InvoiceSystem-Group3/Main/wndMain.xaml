@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InvoiceSystem_Group3"
         mc:Ignorable="d"
-        Title="Walmart Invoice System" Height="450" Width="800">
+        Title="Walmart Invoice System" Height="450" Width="800"
+		Loaded="Window_Loaded">
+	    
     <DockPanel>
         <Menu DockPanel.Dock="Top" Background="#F1F1F1">
             <MenuItem Header="File">
