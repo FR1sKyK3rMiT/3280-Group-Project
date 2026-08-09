@@ -1,62 +1,68 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InvoiceSystem_Group3.Search
 {
-    public class clsSearchSQL
+    /// <summary>
+    /// Contains all SQL statements utilized by the Search Window.
+    /// This keeps all raw database command text isolated to a single, static class.
+    /// </summary>
+    public static class clsSearchSQL
     {
         /// <summary>
-        /// This SQL selects all columns to bind to the primary data grid.
+        /// Returns a query to get unique, distinct invoice numbers sorted from lowest to highest.
         /// </summary>
-        public string SelectAllInvoices()
+        /// <returns>SQL string for unique invoice numbers.</returns>
+        public static string GetDistinctInvoiceNums()
         {
-            string sSQL = "SELECT InvoiceNum, InvoiceDate, TotalCost FROM Invoices";
-            return sSQL;
+            return "SELECT DISTINCT InvoiceNum FROM Invoices ORDER BY InvoiceNum ASC";
         }
 
         /// <summary>
-        /// This SQL populates the unique Invoice Number lookup combo box.
+        /// Returns a query to get unique, distinct invoice dates sorted chronologically.
         /// </summary>
-        public string GetUniqueInvoiceNumbers()
+        /// <returns>SQL string for unique invoice dates.</returns>
+        public static string GetDistinctInvoiceDates()
         {
-            string sSQL = "SELECT Distinct(InvoiceNum) FROM Invoices";
-            return sSQL;
+            return "SELECT DISTINCT InvoiceDate FROM Invoices ORDER BY InvoiceDate ASC";
         }
 
         /// <summary>
-        /// This SQL populates the unique Invoice Date filter combo box.
+        /// Returns a query to get unique, distinct total costs sorted from smallest to largest.
         /// </summary>
-        public string GetUniqueInvoiceDates()
+        /// <returns>SQL string for unique total costs.</returns>
+        public static string GetDistinctTotalCosts()
         {
-            string sSQL = "SELECT Distinct(InvoiceDate) FROM Invoices";
-            return sSQL;
+            return "SELECT DISTINCT TotalCost FROM Invoices ORDER BY TotalCost ASC";
         }
 
         /// <summary>
-        /// This SQL populates the unique Total Cost filter combo box.
+        /// Dynamically builds a combined query allowing multiple filter fields to be active simultaneously.
         /// </summary>
-        public string GetUniqueTotalCosts()
+        /// <param name="sInvoiceNum">The selected invoice number filter value (can be null/empty).</param>
+        /// <param name="sDate">The selected date filter value (can be null/empty).</param>
+        /// <param name="sTotalCost">The selected total cost filter value (can be null/empty).</param>
+        /// <returns>A dynamically built SQL statement containing all active criteria selections.</returns>
+        public static string FilterInvoices(string sInvoiceNum, string sDate, string sTotalCost)
         {
-            string sSQL = "SELECT Distinct(TotalCost) FROM Invoices";
-            return sSQL;
-        }
+            string sQuery = "SELECT InvoiceNum, InvoiceDate, TotalCost FROM Invoices WHERE 1=1";
 
-        /// <summary>
-        /// Dynamic multi-attribute filtering SQL based on selected criteria.
-        /// </summary>
-        public string FilterInvoices(string sInvoiceId, string sDate, string sTotalCost)
-        {
-            string sSQL = "SELECT InvoiceNum, InvoiceDate, TotalCost FROM Invoices WHERE 1=1";
+            if (!string.IsNullOrEmpty(sInvoiceNum))
+            {
+                sQuery += " AND InvoiceNum = " + sInvoiceNum;
+            }
 
-            if (!string.IsNullOrEmpty(sInvoiceId)) sSQL += " AND InvoiceNum = " + sInvoiceId;
-            if (!string.IsNullOrEmpty(sDate)) sSQL += $" AND InvoiceDate = '{sDate}'";
-            if (!string.IsNullOrEmpty(sTotalCost)) sSQL += " AND TotalCost = " + sTotalCost;
+            if (!string.IsNullOrEmpty(sDate))
+            {
+                sQuery += " AND InvoiceDate = #" + sDate + "#";
+            }
 
-            return sSQL;
+            if (!string.IsNullOrEmpty(sTotalCost))
+            {
+                sQuery += " AND TotalCost = " + sTotalCost;
+            }
+
+            sQuery += " ORDER BY InvoiceNum ASC";
+            return sQuery;
         }
     }
 }
-

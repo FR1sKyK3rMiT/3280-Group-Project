@@ -8,121 +8,119 @@
         Height="650" Width="900"
         Loaded="Window_Loaded">
 
-	<DockPanel>
+    <DockPanel>
+        <!-- Top Menu Container Control Framework -->
+        <Menu DockPanel.Dock="Top" Background="#F0F0F0" Padding="5">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Search Invoices" Click="SearchInvoiceBtn_Click"/>
+                <MenuItem Header="_Manage Items" Click="ManageItemsBtn_Click"/>
+            </MenuItem>
+        </Menu>
 
-		<!-- ===================== MENU ===================== -->
-		<Menu DockPanel.Dock="Top">
-			<MenuItem Header="File">
-				<MenuItem Header="Search for Invoice" Click="SearchInvoiceBtn_Click"/>
-				<MenuItem Header="Update Items Table" Click="ManageItemsBtn_Click"/>
-			</MenuItem>
-		</Menu>
+        <!-- ===================== MAIN CONTENT ===================== -->
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <!-- Invoice Header -->
+                <RowDefinition Height="Auto"/>
+                <!-- Item Entry -->
+                <RowDefinition Height="*"/>
+                <!-- DataGrid -->
+                <RowDefinition Height="Auto"/>
+                <!-- Total + Buttons -->
+            </Grid.RowDefinitions>
 
-		<!-- ===================== MAIN CONTENT ===================== -->
-		<Grid Margin="20">
+            <!-- ===================== INVOICE HEADER ===================== -->
+            <GroupBox Header="Invoice Information" Margin="0,0,0,20">
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="200"/>
+                    </Grid.ColumnDefinitions>
 
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto"/>
-				<!-- Invoice Header -->
-				<RowDefinition Height="Auto"/>
-				<!-- Item Entry -->
-				<RowDefinition Height="*"/>
-				<!-- DataGrid -->
-				<RowDefinition Height="Auto"/>
-				<!-- Total + Buttons -->
-			</Grid.RowDefinitions>
+                    <TextBlock Text="Invoice Number:" VerticalAlignment="Center"/>
+                    <TextBox x:Name="txtInvoiceNum" Grid.Column="1" IsReadOnly="True" Margin="5"/>
 
-			<!-- ===================== INVOICE HEADER ===================== -->
-			<GroupBox Header="Invoice Information" Margin="0,0,0,20">
-				<Grid Margin="10">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="150"/>
-						<ColumnDefinition Width="200"/>
-						<ColumnDefinition Width="150"/>
-						<ColumnDefinition Width="200"/>
-					</Grid.ColumnDefinitions>
+                    <TextBlock Text="Invoice Date:" Grid.Column="2" VerticalAlignment="Center"/>
+                    <DatePicker x:Name="dpInvoiceDate" Grid.Column="3" Margin="5"/>
+                </Grid>
+            </GroupBox>
 
-					<TextBlock Text="Invoice Number:" VerticalAlignment="Center"/>
-					<TextBox x:Name="txtInvoiceNum" Grid.Column="1" IsReadOnly="True" Margin="5"/>
+            <!-- ===================== ITEM ENTRY SECTION ===================== -->
+            <GroupBox Header="Add Items" Grid.Row="1" Margin="0,0,0,20">
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="150"/>
+                    </Grid.ColumnDefinitions>
 
-					<TextBlock Text="Invoice Date:" Grid.Column="2" VerticalAlignment="Center"/>
-					<DatePicker x:Name="dpInvoiceDate" Grid.Column="3" Margin="5"/>
-				</Grid>
-			</GroupBox>
+                    <TextBlock Text="Item:" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="cbItems" Grid.Column="1" Margin="5" SelectionChanged="cbItems_SelectionChanged"/>
 
-			<!-- ===================== ITEM ENTRY SECTION ===================== -->
-			<GroupBox Header="Add Items" Grid.Row="1" Margin="0,0,0,20">
-				<Grid Margin="10">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="150"/>
-						<ColumnDefinition Width="200"/>
-						<ColumnDefinition Width="150"/>
-						<ColumnDefinition Width="200"/>
-						<ColumnDefinition Width="150"/>
-					</Grid.ColumnDefinitions>
+                    <TextBlock Text="Cost:" Grid.Column="2" VerticalAlignment="Center"/>
+                    <TextBox x:Name="txtItemCost" Grid.Column="3" Margin="5" IsReadOnly="True"/>
 
-					<TextBlock Text="Item:" VerticalAlignment="Center"/>
-					<ComboBox x:Name="cbItems" Grid.Column="1" Margin="5" SelectionChanged="cbItems_SelectionChanged"/>
-
-					<TextBlock Text="Cost:" Grid.Column="2" VerticalAlignment="Center"/>
-					<TextBox x:Name="txtItemCost" Grid.Column="3" Margin="5" IsReadOnly="True"/>
-
-					<Button Content="Add Item"
+                    <Button x:Name="AddItemBtn" Content="Add Item"
                             Grid.Column="4"
                             Width="100"
                             Height="30"
                             Margin="5"
                             Click="AddItemBtn_Click"/>
-				</Grid>
-			</GroupBox>
+                </Grid>
+            </GroupBox>
 
-			<!-- ===================== LINE ITEMS GRID ===================== -->
-			<GroupBox Header="Invoice Line Items" Grid.Row="2" Margin="0,0,0,20">
-				<DataGrid x:Name="dgLineItems"
+            <!-- ===================== LINE ITEMS GRID ===================== -->
+            <GroupBox Header="Invoice Line Items" Grid.Row="2" Margin="0,0,0,20">
+                <DataGrid x:Name="dgLineItems"
                           AutoGenerateColumns="False"
                           CanUserAddRows="False"
                           IsReadOnly="True"
                           Margin="10">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Line #" Binding="{Binding LineItemNum}" Width="80"/>
+                        <DataGridTextColumn Header="Item Code" Binding="{Binding ItemCode}" Width="120"/>
+                        <DataGridTextColumn Header="Description" Binding="{Binding ItemDesc}" Width="200"/>
+                        <DataGridTextColumn Header="Cost" Binding="{Binding Cost}" Width="100"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
 
-					<DataGrid.Columns>
-						<DataGridTextColumn Header="Line #" Binding="{Binding LineItemNum}" Width="80"/>
-						<DataGridTextColumn Header="Item Code" Binding="{Binding ItemCode}" Width="120"/>
-						<DataGridTextColumn Header="Description" Binding="{Binding ItemDesc}" Width="200"/>
-						<DataGridTextColumn Header="Cost" Binding="{Binding Cost}" Width="100"/>
-					</DataGrid.Columns>
+            <!-- ===================== TOTAL + ACTION BUTTONS ===================== -->
+            <Grid Grid.Row="3">
+                <!-- Fixed: Changed singular tag to the required plural ColumnDefinitions tag -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
 
-				</DataGrid>
-			</GroupBox>
+                <!-- Total Display Component -->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="Total:" FontSize="18" FontWeight="Bold"/>
+                    <TextBlock x:Name="txtTotal" FontSize="18" FontWeight="Bold" Margin="10,0,0,0"/>
+                </StackPanel>
 
-			<!-- ===================== TOTAL + ACTION BUTTONS ===================== -->
-			<Grid Grid.Row="3">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="*"/>
-					<ColumnDefinition Width="Auto"/>
-				</Grid.ColumnDefinitions>
 
-				<!-- Total -->
-				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-					<TextBlock Text="Total:" FontSize="18" FontWeight="Bold"/>
-					<TextBlock x:Name="txtTotal" FontSize="18" FontWeight="Bold" Margin="10,0,0,0"/>
-				</StackPanel>
-
-				<!-- Buttons -->
-				<StackPanel Grid.Column="1" Orientation="Horizontal">
-					<Button Content="Delete Selected Item"
+                <!-- Action Button Layout Containers -->
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <Button x:Name="DeleteItemBtn" Content="Delete Selected Item"
                             Width="150" Height="35" Margin="10"
                             Click="DeleteItemBtn_Click"/>
 
-					<Button Content="Save Invoice"
+                    <Button x:Name="SaveInvoiceBtn" Content="Save Invoice"
                             Width="120" Height="35" Margin="10"
                             Click="SaveInvoiceBtn_Click"/>
 
-					<Button Content="Edit Invoice"
+                    <Button x:Name="EditInvoiceBtn" Content="Edit Invoice"
                             Width="120" Height="35" Margin="10"
                             Click="EditInvoiceBtn_Click"/>
-				</StackPanel>
-			</Grid>
-
-		</Grid>
-	</DockPanel>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </DockPanel>
+    <!-- Properly closes out the main layout panel -->
 </Window>

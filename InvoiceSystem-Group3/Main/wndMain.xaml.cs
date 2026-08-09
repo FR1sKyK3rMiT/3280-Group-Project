@@ -13,25 +13,30 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data;
 using System.Linq;
-
+using System.Runtime.Remoting.Activation;
 using InvoiceSystem_Group3.Search;
 using InvoiceSystem_Group3.Items;
 using InvoiceSystem_Group3.Main;
 using InvoiceSystem_Group3;
-using System.Runtime.Remoting.Activation;
-//using InvoiceSystem_Group3.clsDataAccess;
 
 namespace InvoiceSystem_Group3.Main
 {
+
+    /// <summary>
+    /// Interaction logic for wndMain.xaml. Handles primary invoice creation and modification flows.
+    /// </summary>
     public partial class wndMain : Window
     {
+        private readonly clsMainLogic logic = new clsMainLogic();
+        private readonly clsMainSQL sql = new clsMainSQL();
+        private readonly clsDataAccess db = new clsDataAccess();
 
-        private clsMainLogic logic = new clsMainLogic();
-        private clsMainSQL sql = new clsMainSQL();
-        private clsDataAccess db = new clsDataAccess();
-
+        /// <summary>
+        /// Initializes a new instance of the Main UI Window.
+        /// </summary>
         public wndMain()
         {
+
             InitializeComponent();
         }
 
@@ -42,7 +47,7 @@ namespace InvoiceSystem_Group3.Main
         {
             try
             {
-                db.TestConnection;
+                db.TestConnection();
                 LoadItemsIntoComboBox();
                 SwitchToReadOnlyMode();
                 txtInvoiceNum.Text = ""; //No invoice loaded yet
@@ -100,7 +105,8 @@ namespace InvoiceSystem_Group3.Main
         {
             try
             {
-                InvoiceHeader header = logic.LoadInvoiceFromSearch(invoiceId);
+                // Fixed: Explicitly typed to your teammate's logic layer version
+                InvoiceSystem_Group3.Main.clsMainLogic.InvoiceHeader header = logic.LoadInvoiceFromSearch(invoiceId);
 
                 txtInvoiceNum.Text = header.InvoiceNum.ToString();
                 dpInvoiceDate.SelectedDate = header.InvoiceDate;
@@ -113,7 +119,7 @@ namespace InvoiceSystem_Group3.Main
             }
             catch(Exception ex)
             {
-                MessageBox.Show("Error loading invoice: " + ex.Message0);
+                MessageBox.Show("Error loading invoice: " + ex.Message);
             }
         }
 
@@ -253,7 +259,7 @@ namespace InvoiceSystem_Group3.Main
 
                 logic.DeleteItem(selected.LineItemNum);
 
-                dgLineitems.ItemsSource = null;
+                dgLineItems.ItemsSource = null;
                 dgLineItems.ItemsSource = logic.LineItems;
 
                 txtTotal.Text = logic.RunningTotal.ToString("F2");
@@ -273,7 +279,7 @@ namespace InvoiceSystem_Group3.Main
             {
                 if(dpInvoiceDate.SelectedDate == null)
                 {
-                    MessageBox.SelectedDate("Invoice date is required. ");
+                    MessageBox.Show("Invoice date is required. ");
                     return;
                 }
 

@@ -14,25 +14,30 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
+            <!-- Top Filter Panel -->
             <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
                 <StackPanel Margin="10,0">
                     <TextBlock Text="Invoice Number:" Margin="0,0,0,5"/>
-                    <ComboBox Width="120" Name="cbInvoiceNum"/>
+                    <ComboBox Width="120" Name="cbInvoiceNum" SelectionChanged="Filter_SelectionChanged"/>
                 </StackPanel>
                 <StackPanel Margin="10,0">
                     <TextBlock Text="Invoice Date:" Margin="0,0,0,5"/>
-                    <ComboBox Width="120" Name="cbInvoiceDate"/>
+                    <ComboBox Width="120" Name="cbInvoiceDate" SelectionChanged="Filter_SelectionChanged"/>
                 </StackPanel>
                 <StackPanel Margin="10,0">
                     <TextBlock Text="Total Cost:" Margin="0,0,0,5"/>
-                    <ComboBox Width="120" Name="cbTotalCost"/>
+                    <ComboBox Width="120" Name="cbTotalCost" SelectionChanged="Filter_SelectionChanged"/>
                 </StackPanel>
+                <!-- Added Clear Selection Button per requirements -->
+                <Button Content="Clear Selection" Width="100" Height="25" VerticalAlignment="Bottom" Margin="10,0,0,0" Click="ClearBtn_Click"/>
             </StackPanel>
 
-            <DataGrid Grid.Row="1" Name="dgInvoices" AutoGenerateColumns="True" Margin="0,0,0,20" IsReadOnly="True"/>
+            <!-- Set CanUserAddRows to False per professor's hint -->
+            <DataGrid Grid.Row="1" Name="dgInvoices" AutoGenerateColumns="True" Margin="0,0,0,20" IsReadOnly="True" CanUserAddRows="False" SelectionChanged="DgInvoices_SelectionChanged"/>
 
+            <!-- Bottom Action Controls -->
             <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="Select" Width="100" Height="30" Margin="10,0" Click="SelectBtn_Click"/>
+                <Button Content="Select Invoice" Width="110" Height="30" Margin="10,0" Click="SelectBtn_Click"/>
                 <Button Content="Cancel" Width="100" Height="30" Click="CancelBtn_Click"/>
             </StackPanel>
         </Grid>

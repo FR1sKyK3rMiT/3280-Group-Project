@@ -1,3 +1,11 @@
 <Solution>
-  <Project Path="InvoiceSystem-Group3.csproj" Id="c8a1d9d7-332b-4f94-828f-d0ff6932e281" />
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="InvoiceSystem-Group3.csproj" Id="c8a1d9d7-332b-4f94-828f-d0ff6932e281">
+    <Platform Solution="*|x64" Project="x64" />
+    <Platform Solution="*|x86" Project="x86" />
+  </Project>
 </Solution>
